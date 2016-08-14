@@ -1,0 +1,38 @@
+1.jdk
+vim /etc/profile
+
+    export JAVA_HOME=/usr/share/jdk1.6.0_14
+    export PATH=$JAVA_HOME/bin:$PATH
+    export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+source /etc/profile
+
+
+2.tomcat
+    2.1配置用户
+        tomcat-users.xml    
+        <user username="admin" password="admin" roles="manager-gui"/>
+
+    2.2配置jdk启动参数  
+        bin/catalina.sh     
+        JAVA_OPTS="-Xms2048m -Xmx2048m -Xss1024K -XX:PermSize=512m -XX:MaxPermSize=512m"
+
+    2.3配置连接数   
+        server.xml
+        <Connector port="80" protocol="HTTP/1.1"
+        	   connectionTimeout="20000"
+    		   redirectPort="8443"
+    		   minProcessors="128"
+    		   maxProcessors="4000"
+    		   maxConnections="4000"
+    		   acceptCount="4000"
+    		   maxThreads="4000"
+    		   enableLookups="false"
+        />
+
+    2.4配置连接日志
+        server.xml
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b %D"   --增加%D显示响应时间
+        />
