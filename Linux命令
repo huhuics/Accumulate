@@ -10,3 +10,6 @@
     
 2.查看端口是否监听
     netstat -anp | grep :9200
+    
+3.测试链接
+    curl -X GET http://127.0.0.1:8089/mPay/simulator/menu
