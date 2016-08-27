@@ -1,0 +1,11 @@
+1.远程访问sftp：
+    sftp -oPort=[端口号] [用户名]@[远程sftp服务器IP]
+    例如：sftp -oPort=60001 root@192.168.1.256
+
+    sftp> get /var/web/index.php  /home/
+    这条语句将从远程主机的  /var/web/目录下将 index.php下载到本地/home/目录下
+    
+    sftp> put /home/java.pdf /var/web/upload/ 
+    这条语句将把本地 /home/目录下的java.pdf文件上传至远程主机/var/web/upload/目录下
+    
+    
