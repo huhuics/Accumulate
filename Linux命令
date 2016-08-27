@@ -13,3 +13,8 @@
     
 3.测试链接
     curl -X GET http://127.0.0.1:8089/mPay/simulator/menu
+    
+4.进程后台运行
+    nohup ./start.sh >nohup &
+    
+    
