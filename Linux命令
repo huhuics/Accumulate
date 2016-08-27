@@ -8,4 +8,5 @@
     sftp> put /home/java.pdf /var/web/upload/ 
     这条语句将把本地 /home/目录下的java.pdf文件上传至远程主机/var/web/upload/目录下
     
-    
+2.查看端口是否监听
+    netstat -anp | grep :9200
