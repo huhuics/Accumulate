@@ -9,3 +9,6 @@ Goals 参数 : mybatis-generator:generate -Dmybatis.generator.overwrite=true
 
 2.maven安装本地jar包
 mvn install:install-file  -Dfile=F:\jar_name.jar -DgroupId=com.mygroup -DartifactId=myart -Dversion=1.1.1 -Dpackaging=jar  -DgeneratePom=true -DcreateChecksum=true
+
+3.install时打包源代码
+mvn clean source:jar install
