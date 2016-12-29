@@ -1,4 +1,4 @@
-# 设置主键自增
+## 设置主键自增
 1. **创建序列**
 ```
 CREATE SEQUENCE SEQ_NAME  --序列名
@@ -18,7 +18,7 @@ select SEQ_NAME.nextval into :new.ID from dual;  --sequence名
 end;
 ```
 
-# 查询时间运算
+## 查询时间运算
 1. **numtodsinterval(<x>,<c>)**, x是一个数字，c是一个字符串表示x的单位，这个函数把x转为interval day to second数据类型，常用的单位有day, hour, minute, second
 2. **numtoyminterval(<x>,<c>)**, 该函数与numtodsinterval类似，把x转为year或者month
 ```
