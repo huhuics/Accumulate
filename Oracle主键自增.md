@@ -1,4 +1,5 @@
---1.创建序列
+## 设置主键自增
+1. 创建序列
 CREATE SEQUENCE SEQ_NAME  --序列名
 INCREMENT BY 1    
 START WITH 1  --从1开始  
@@ -6,7 +7,7 @@ NOMAXVALUE    --不设最大值
 NOCYCLE       --不循环  
 NOCACHE;  
 
---2.创建触发器
+2. 创建触发器
 create or replace trigger TRI_NAME  --触发器名
 before insert on TABLE_NAME  --表名
 for each row
