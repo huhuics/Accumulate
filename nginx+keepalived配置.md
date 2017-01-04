@@ -166,6 +166,9 @@ then
     fi
 fi
  ```
- 
+ + 查看keepalived日志 
+ ```shell
+ tail -f /var/log/messages
+ ```
  
  
