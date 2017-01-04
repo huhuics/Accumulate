@@ -56,3 +56,34 @@ nohup ./kibana >nohup.out &
 
 访问http://ip:5601
 
+## 程序配置
++ 引入依赖
+```xml
+        <dependency>
+            <groupId>com.cwbase</groupId>
+            <artifactId>logback-redis-appender</artifactId>
+            <version>1.1.5</version>
+    <!--        
+    <exclusions>
+                <exclusion>
+                    <groupId>redis.clients</groupId>
+                    <artifactId>jedis</artifactId>
+                </exclusion>
+            </exclusions>
+     -->
+        </dependency>
+```
++ logback.xml配置
+```xml
+<appender name="logstash" class="com.cwbase.logback.RedisAppender">
+		<source>logstashdemo</source>
+		<type>dev</type>
+		<host>168.33.131.164</host>
+		<port>6379</port>
+		<key>logstash</key>
+		<tags>dev</tags>
+		<mdc>true</mdc>
+		<location>true</location>
+		<callerStackIndex>0</callerStackIndex>
+	</appender>
+```
