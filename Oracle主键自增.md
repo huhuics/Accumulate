@@ -6,7 +6,7 @@ INCREMENT BY 1
 START WITH 1  --从1开始  
 NOMAXVALUE    --不设最大值  
 NOCYCLE       --不循环  
-NOCACHE;  
+CACHE 20;     --缓存20个序列
 ```
 2. **创建触发器**
 ```SQL
