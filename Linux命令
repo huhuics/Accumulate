@@ -1,0 +1,25 @@
+1.远程访问sftp：
+    sftp -oPort=[端口号] [用户名]@[远程sftp服务器IP]
+    例如：sftp -oPort=60001 root@192.168.1.256
+
+    sftp> get /var/web/index.php  /home/
+    这条语句将从远程主机的  /var/web/目录下将 index.php下载到本地/home/目录下
+    
+    sftp> put /home/java.pdf /var/web/upload/ 
+    这条语句将把本地 /home/目录下的java.pdf文件上传至远程主机/var/web/upload/目录下
+    
+2.查看端口是否监听
+    netstat -anp | grep :9200
+    
+3.测试链接
+    curl -X GET http://127.0.0.1:8089/mPay/simulator/menu
+    
+4.进程后台运行
+    nohup ./start.sh >nohup &
+    
+5.设置当前时间
+    date -s "2015-01-22 00:00:00"
+
+6.磁盘空间查看
+    du -sh /home : 查看当前目录总共占的容量。而不单独列出各子项占用的容量 
+    du -lh --max-depth=1 /home : 查看当前目录下一级子文件和子目录占用的磁盘容量

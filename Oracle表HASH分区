@@ -1,0 +1,6 @@
+partition by hash (TRADE_NO)  --分区的表字段
+(
+  partition PART_00 tablespace TABLESPACE00,    --表空间名
+  partition PART_01 tablespace TABLESPACE01,
+  partition PART_02 tablespace TABLESPACE02
+);
