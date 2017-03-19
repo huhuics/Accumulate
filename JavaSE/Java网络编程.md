@@ -12,7 +12,12 @@
    3. Call the servlets `init()` method  
    4. Call the servlets `service()` method  
    5. Call the servlets `destory()` method  
-   Typically, only a single instance of the servlet is created, and concurrent reqeusts to the servlet are executed on the same servlet instance.
-   Step 1, 2 and 3 are executed only once, when the servlet is initially loaded. By default the servlet is not loaded until the first request is received for it. You can force the container to load the servlet when the container starts up by config web.xml though.  
-   For every request received to the servlet, the servlets `service()` method is called.  
-   Step 5 is executed when the servlet container unloads the servlet, which is only executed once.
+   Typically, only a single instance of the servlet is created, and concurrent reqeusts to the servlet are executed on the same servlet instance.  
+   Step 1, 2 and 3 are executed only once, when the servlet is initially loaded. By default the servlet is not loaded until the first request is received for it. You can force the container to load the servlet when the container starts up by config web.xml though.  
+   For every request received to the servlet, the servlets `service()` method is called by web server.  
+   Step 5 is executed when the servlet container unloads the servlet, which is only executed once.  
+ + `HttpServletResponse.sendRedirect()`方法和`RequestDispatcher.forward()`方法都可以利用其它资源(Servlet, jsp, html)来为客户端服务，但这两个方法是有区别的。  
+   1. 重定向sendRedirect()交互：浏览器访问servlet1，servlet1想让servlet2位客户端服务，servlet1调用sendRedirect方法，将客户端的请求重定向到servlet2，浏览器访问servlet2，servlet2对客户端请求做出相应。  
+   调用sendRedirect方法，实际是告诉浏览器servlet2所在位置，让浏览器重新访问servlet2，因此浏览器地址栏的URL将会改变。此过程对用户是透明的。sendRedirect不但可以在位于同一主机上相同或者不同web应用程序进行重定向，而且可以将客户端重定向到其它服务器web应用程序资源。  
+   2. forward交互：浏览器访问servlet1，servlet1想让servlet2对客户端的请求进行响应，于是调用forward方法，将请求转发给servlet2处理，servlet2对请求做出响应。  
+   调用forward方法，浏览器并不知道为其服务的servlet已经换成了servlet2，它只知道发出一个请求获得一个响应，地址栏不变。
