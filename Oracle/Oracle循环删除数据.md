@@ -6,13 +6,13 @@ begin
   select count(1) / maxrows
     into delete_ct
     from [table_name]
-   where gmt_create >= to_date(concat('2016-09-03', ' 00:00:00'), 'yyyy-mm-dd hh24:mi:ss')
-     and gmt_create <= to_date(concat('2016-10-03', ' 23:59:59'), 'yyyy-mm-dd hh24:mi:ss');
+   where gmt_create >= to_date('2016-09-03 00:00:00', 'yyyy-mm-dd hh24:mi:ss')
+     and gmt_create <= to_date('2016-10-03 23:59:59', 'yyyy-mm-dd hh24:mi:ss');
    for i in 1 .. TRUNC(delete_ct) + 1 
      loop 
        delete [table_name]
-       where gmt_create >= to_date(concat('2016-09-03', ' 00:00:00'), 'yyyy-mm-dd hh24:mi:ss')
-         and gmt_create <= to_date(concat('2016-10-03', ' 23:59:59'), 'yyyy-mm-dd hh24:mi:ss')
+       where gmt_create >= to_date('2016-09-03 00:00:00', 'yyyy-mm-dd hh24:mi:ss')
+         and gmt_create <= to_date('2016-10-03 23:59:59', 'yyyy-mm-dd hh24:mi:ss')
          and rownum <= maxrows;
        commit;
      end loop;
