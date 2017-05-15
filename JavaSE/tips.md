@@ -5,3 +5,4 @@
  + WSDL(`Web Service Description Language`)是使用XML来描述WebService有哪些方法、参数类型、访问路径等
  + SOA(`Service-Oriented Architecture`)并不是Web Service，SOA是一种软件设计思想和架构模式；Web Service只是实现SOA的一种方式
  + REST(`Representational State Transfer`)是一种轻量级的Web Service架构，可以完全通过HTTP协议实现，其实现和操作比SOAP和XML-RPC更为简洁，性能、效率和易用性都优于SOAP协议
+ + 通过Java反射机制创建类的实例对象主要有两种方法：1. Class.newInstance() 2. 调用类对象的构造方法。通过`Class.newInstance()`创建类的实例，本质是执行了类对象的默认空参的构造方法，如果一个类没有空参的构造方法，则会抛出`java.lang.NoSuchMethodException`异常
