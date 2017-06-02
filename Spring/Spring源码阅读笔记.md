@@ -35,3 +35,14 @@
 14. AOP可以帮助我们为分散的对象引入公共的行为，它的作用主要是用来描述分散在对象、类或函数中的横切关注点，从关注点中分离出横切关注点是AOP的核心概念。
 15. 在编译器修改源代码、运行期字节码加载前修改字节码或字节码加载后动态创建代理类的字节码，这是AOP的具体**实现方法**，而它是由三个重要步骤来完成的，首先是**生成代理对象**，然后是**拦截器的作用**，最后是**编织的具体实现**。
 16. Spring AOP内部使用JDK动态代理或者CGLIB来为目标对象创建代理。如果被代理的目标对象实现了至少一个接口，则会使用JDK动态代理，所有该目标类型实现的接口都将被代理。若该目标对象没有实现任何接口，则创建一个CGLIB代理。尽管CGLIB效率更高，但还是推荐使用JDK动态代理。
+17. 网络参考模型  
+![](https://github.com/huhuics/Accumulate/blob/master/image/%E7%BD%91%E7%BB%9C%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.jpg)
+18. 网络模型层次图  
+![](https://github.com/huhuics/Accumulate/blob/master/image/%E6%A8%A1%E5%9E%8B%E5%B1%82%E6%AC%A1%E5%9B%BE.jpg)  
+19. Spring MVC框架是一个基于请求驱动的web框架，使用前端控制器模式来进行设计，再根据请求映射规则发送给相应的页面控制器（动作/处理器）进行处理。
+20. Spring MVC请求流程图    
+![](https://github.com/huhuics/Accumulate/blob/master/image/SpringMVC.jpg)    
+    + 请求先到达一个前端控制器Servlet——DispatcherServlet，它的任务是根据请求信息（如URL）将请求发送给Spring MVC控制器
+    + 页面控制器接收到请求后，进行功能处理，处理完毕后返回一个ModelAndView（模型数据和逻辑视图名）
+    + 前端控制器收回控制权，根据返回的逻辑视图名，选择相应的视图进行渲染，并把模型数据传入以便视图渲染
+    + 前端控制器再次收回控制权，将响应返回给用户
