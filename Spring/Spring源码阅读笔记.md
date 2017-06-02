@@ -32,3 +32,6 @@
 11. AbstractBeanFactory的doGetBean方法是依赖注入的实际入口，而依赖注入触发的前提是BeanDefinition数据已经建立好。
 12. Spring IoC容器的核心是BeanFactory和BeanDefinition，分别对应对象工厂和依赖配置的概念。虽然我们通常使用的是ApplicationContext的实现类，但ApplicationContext只是封装和扩展了BeanFactory的功能，无论是通过XML配置还是注解实现依赖注入，最后都会将bean的定义映射成BeanDefinition。
 13. Bean在XML文件里的展现形式是```<bean id="...">...</bean>```，当这个节点被加载到内存，就被抽象为BeanDefiniton了，在XML Bean节点中的那些关键字，在BeanDefinition中都有相对应的成员变量。Spring通过定义BeanDefinition来管理基于Spring的应用中各种对象以及它们之间的相互依赖关系。BeanDefinition抽象了我们对Bean的定义，是让容器起作用的主要数据类型。
+14. AOP可以帮助我们为分散的对象引入公共的行为，它的作用主要是用来描述分散在对象、类或函数中的横切关注点，从关注点中分离出横切关注点是AOP的核心概念。
+15. 在编译器修改源代码、运行期字节码加载前修改字节码或字节码加载后动态创建代理类的字节码，这是AOP的具体**实现方法**，而它是由三个重要步骤来完成的，首先是**生成代理对象**，然后是**拦截器的作用**，最后是**编织的具体实现**。
+16. Spring AOP内部使用JDK动态代理或者CGLIB来为目标对象创建代理。如果被代理的目标对象实现了至少一个接口，则会使用JDK动态代理，所有该目标类型实现的接口都将被代理。若该目标对象没有实现任何接口，则创建一个CGLIB代理。尽管CGLIB效率更高，但还是推荐使用JDK动态代理。
