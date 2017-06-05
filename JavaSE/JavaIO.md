@@ -9,7 +9,7 @@
 + 介绍NIO——NIO引入了四个关键的抽象数据类型
     - `Buffer`: 本质上是内存块，可以用于读写数据
     - `Charset`: 提供Unicode字符串映射到字节序列以及逆映射的操作
-    - `Channel`: 包含socket, file和pipe三种管道。代表一个到实体（如一个硬件设备、一个文件、一个网络套接字或者一个能够执行一个或者多个不同I/O操作的程序组件）的开放连接，如读操作和写操作
+    - `Channel`: 包含socket, file和pipe三种管道。代表一个到实体（如一个硬件设备、一个文件、一个网络套接字或者一个能够执行一个或者多个不同I/O操作的程序组件）的开放连接，如读操作和写操作
     - `Selector`: 允许一个线程控制多个Channel    
     ![Channel](http://tutorials.jenkov.com/images/java-nio/overview-channels-buffers.png)  
     ![Selector](http://tutorials.jenkov.com/images/java-nio/overview-selectors.png)
