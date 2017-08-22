@@ -12,5 +12,13 @@
     - 用于定义/创建JobDetail实例    
 + **TriggerBuilder**    
     - 用于定义/创建Trigger实例
-    
-    
+    
+### 几个注解    
++ **@DisallowConcurrentExecution**    
+    - 在Job上添加此注解表示告诉Quartz不并发调度这个job    
++ **@PersistJobDataAfterExecution**    
+    - 在Job上添加此注解表示，当job成功执行以后，Quartz会更新JobDetail中JobDataMap的值，使得下次调度时同一个job使用更新后的值。如果使用`@PersistJobDataAfterExecution`注解，最好是同时使用`@DisallowConcurrentExecution`，避免因线程竞争导致数据更新问题。    
+    
+#### Trigger    
++ Trigger可以设置优先级，默认优先级是5。当不同的trigger在同一时间触发且资源不足时，才会比较优先级。
+
