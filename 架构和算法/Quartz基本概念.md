@@ -11,7 +11,9 @@
 + **JobBuilder**    
     - 用于定义/创建JobDetail实例    
 + **TriggerBuilder**    
-    - 用于定义/创建Trigger实例
+    - 用于定义/创建Trigger实例    
+
+> Many Triggers can point to the same Job, but a single Trigger can only point to one Job.
     
 ### 几个注解    
 + **@DisallowConcurrentExecution**    
