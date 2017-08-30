@@ -57,6 +57,30 @@
 + DataSource(if necessary)    
 + The Scheduler itself    
 
+#### Misfire策略    
++ SimpleTrigger    
+    - MISFIRE_INSTRUCTION_IGNORE_MISFIRE_POLICY
+    - MISFIRE_INSTRUCTION_FIRE_NOW    
+    - MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT : 失效之后马上启动再执行，但是起始次数清零    
+    - MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_REMAINING_REPEAT_COUNT : 失效之后马上启动再执行，但总执行次数不变    
+    - MISFIRE_INSTRUCTION_RESCHEDULE_NEXT_WITH_REMAINING_COUN : 每次失效后，在下个定义的时间节点再执行    
+    - MISFIRE_INSTRUCTION_RESCHEDULE_NEXT_WITH_EXISTING_COUNT    
+    
++ CronTrigger    
+    - MISFIRE_INSTRUCTION_IGNORE_MISFIRE_POLICY : 所有misfire的任务会马上执行    
+    - MISFIRE_INSTRUCTION_DO_NOTHING : 所有misfire不管，执行下一个周期的任务    
+    - MISFIRE_INSTRUCTION_FIRE_NOW : 失效之后再恢复并马上执行    
+
+`Trigger`都有`Trigger.MISFIRE_INSTRUCTION_SMART_POLICY`。CronTrigger的smart policy是MISFIRE_INSTRUCTION_FIRE_NOW。    
+不同的配置决定不同的misfire行为，大的方向其实就这几个：
+ + 忽略    
+ + 立即执行    
+ + 继续    
+ + 放弃    
+ + 等待下一个周期    
+ 
+**注意：** 如果因为`@PersistJobDataAfterExecution`标注的任务，如果任务本来要执行20次，而任务本身执行时间超过调度间隔，任务只会推迟执行且会执行满20次。    
+
 #### 其它说明    
 + **集群模式**    
     - 当使用`jobStoreTX, JobStoreCMT or TerracottaJobStore`时可以使用集群模式    
