@@ -77,6 +77,13 @@ Broker服务器负责消息的投递、存储、查询、高可用保证等。Br
     
 > 如果是并发消费模式，则不再保证消息的消费顺序    
 
+## RocketMQ物理部署结构    
+![](https://github.com/huhuics/Accumulate/blob/master/image/RocketMQ%E7%89%A9%E7%90%86%E9%83%A8%E7%BD%B2%E7%BB%93%E6%9E%84.png?raw=true)    
+如上图所示，RocketMQ的部署结构有以下特点：    
+  + NameServer是一个几乎无状态节点，可集群部署，节点之间无任何信息同步。    
+  + Broker部署相对复杂，Broker分为Master与Slave，一个Master可以对应多个Slave，但是一个Slave只能对应一个Master，Master与Slave的对应关系通过指定相同的BrokerName，不同的BrokerId来定义，BrokerId为0表示Master，非0表示Slave。Master也可以部署多个。每个Broker与NameServer集群中的所有节点建立长连接，定时注册Topic信息到所有NameServer。    
+  + Producer与NameServer集群中的其中一个节点（随机选择）建立长连接，定期从NameServer取Topic路由信息，并向提供Topic服务的Mater建立长连接，且定时向Master发送心跳。Producer完全无状态，可集群部署。    
+  + Consumer与NameServer集群中其中一个节点（随机选择）建立长连接，定期从NameServer取Topic路由信息，并向提供Topic服务的Master、Slave建立长连接，且定时向Master、Slave发送心跳。Consumer既可以从Master订阅消息，也可以从Slave订阅消息，订阅规则由Broker配置决定。
 
 
 
