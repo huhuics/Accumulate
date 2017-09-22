@@ -191,7 +191,24 @@ RocketMQ第一阶段发送`Prepared消息`后，会拿到消息的地址，第�
   3.同时满足上面两个条件后，`Producer`会选择另外一个队列发送消息    
   
 ### 5.消息存储    
+RocketMQ的消息存储是由`consume queue`和`commit log`配合完成。    
+`consume queue`是消息的逻辑队列，相当于字典的目录，用来指定消息在物理文件`commit log`上的位置，下图是一个Consume Queue的文件组织示例：    
+![](https://github.com/huhuics/Accumulate/blob/master/image/RocketMQ-Consume%20Queue.png?raw=true)    
 
+1. 根据`topic`和`queueId`来组织文件，途中TopicA有两个队列0和1，那么TopicA和QueueId=0组成一个ConsumeQueue，TopicA和QueueId=1组成另一个ConsumeQueue    
+2. 按照消费端的`GroupName`来分组重试队列，如果消费端消费失败，消息将被发往重试队列中，比如图中的`%RETRY%ConsumerGroupA`    
+3. 按照消费端的`GroupName`来分组死信队列，如果消费端消费失败，并重试指定次数后，仍然失败，则发往死信队列，比如图中的`%DLQ%ConsumerGroupA`    
+
+> 死信队列(Dead Letter Queue)一般用于存放由于某种原因无法传递的消息，比如处理失败或者已经过期的消息    
+
+`Commit Log`是消息存放的物理文件，每台broker上的commitlog被本机所有queue共享，不做任何区分。    
+
+### 6.消息订阅    
+RocketMQ消息订阅有两种模式，一种是Push模式，即MQServer主动向消费端推送；另一种是Pull模式，即消费端在需要时，主动到MQServer拉取。但在具体实现时，Push和Pull模式都是采用消费端主动拉取的方式。    
+
+Consumer端每隔一段时间主动向broker发送拉消息请求，broker在收到Pull请求后，如果有消息就立即返回数据，Consumer端收到返回的消息后，再回调消费者设置的listener方法。如果borker在收到pull请求时，消息队列里没有数据，broker端会阻塞请求直到有数据传递或超时才返回。    
+
+具体实现上，Consumer端是通过一个线程将阻塞队列`LinkedBlockingQueue<PullRequest>`中的`PullRequest`发送到broker拉取消息，以防止Consumer一直被阻塞。而Broker端，再接收到Consumer的PullRequest时，如果发现没有消息，会将PullRequest放到ConcurrentHashMap中缓存起来，broker在启动时，会启动一个线程不停的从ConcurrentHashMap取出PullRequest检查，直到有数据返回。
 
 
 
