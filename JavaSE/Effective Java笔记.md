@@ -9,6 +9,12 @@ _记录在阅读《Effective Java》过程中的内容_
     - [4.消除过期的对象引用](#4-消除过期的对象引用)
 - [三. 对于所有对象都通用的方法](#三-对于所有对象都通用的方法)
     - [1.覆盖equals时总要覆盖hashCode](#1-覆盖equals时总要覆盖hashcode)
+    - [2.始终要覆盖toString](#2-始终要覆盖toString)
+    - [3.谨慎地覆盖clone()](#3-谨慎地覆盖clone())
+    - [4.考虑实现Comparable接口](#4-考虑实现Comparable接口)
+- [四. 类和接口](#四-类和接口)
+
+
 
 
 
@@ -135,6 +141,48 @@ _记录在阅读《Effective Java》过程中的内容_
 * 如果两个对象根据equals(Object)方法比较是不相等的，那么调用这两个对象中任意一个对象的hashCode方法，则一定要产生不同的整数结果
 
 关键是第二条：相等的对象必须具有相等的散列码(hash code)。
+
+## 2. 始终要覆盖toString
+toString方法的默认实现包含了类的名称，以及一个“@”符号，接着是散列码的无符号十六进制表示法。子类覆盖toString方法应该返回对象中包含的所有值得关注的信息，这可以使类用起来更加舒适。
+
+## 3. 谨慎地覆盖clone()
+虽然Cloneable接口没有包含任何方法，但是如果需要覆盖Object.clone()方法，则必须实现Cloneable，否则会抛出`CloneNotSupportedException`
+
+**总结：** 所有实现Clonealbe接口都应该：
+* 覆盖`clone()`
+* 返回类型为该类本身
+* 调用`super.clone()`
+* 修正任何需要修正的域    
+	* 拷贝任何包含内部“深层结构”的可变对象
+
+**拷贝构造器（copy constructor）**
+```java
+    public Yum(Yum yum);
+```
+拷贝构造器用的较多，所有通用集合实现都提供了一个拷贝构造器。例如有一个HashSet，希望把它拷贝成一个TreeSet，clone无法提供这样的功能，可以使用转换构造器：`new TreeSet(s)`。
+
+**拷贝工厂（copy factory）**
+```java
+    public static Yum newInstance(Yum yum)
+```
+## 4. 考虑实现Comparable接口
+类实现了`Comparable`接口，就表明它的实例具有内在的排序关系（natural ordering）。对于实现了Comparable接口的对象数组进行排序，只需要：
+```java
+    Arrays.sort(a);
+```
+
+如果你正在编写一个值类（value class），它具有非常明显的内在排序关系，比如按字母顺序、按数值顺序或者年代顺序，那应该考虑实现`Comparable`接口
+
+强烈建议，但不是必须：`a.equals(b) == a.comparaTo(b)`
+
+> BigDecimal是不可变类(Immutable)，做运算以后都会返回一个新的BigDecimal类
+
+# 四 类和接口
+
+
+
+
+
 
 
 
