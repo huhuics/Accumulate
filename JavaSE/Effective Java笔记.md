@@ -9,9 +9,9 @@ _记录在阅读《Effective Java》过程中的内容_
     - [4.消除过期的对象引用](#4-消除过期的对象引用)
 - [三. 对于所有对象都通用的方法](#三-对于所有对象都通用的方法)
     - [1.覆盖equals时总要覆盖hashCode](#1-覆盖equals时总要覆盖hashcode)
-    - [2.始终要覆盖toString](#2-始终要覆盖toString)
+    - [2.始终要覆盖toString](#2-始终要覆盖tostring)
     - [3.谨慎地覆盖clone()](#3-谨慎地覆盖clone)
-    - [4.考虑实现Comparable接口](#4-考虑实现Comparable接口)
+    - [4.考虑实现Comparable接口](#4-考虑实现comparable接口)
 - [四. 类和接口](#四-类和接口)
 
 
