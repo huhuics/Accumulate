@@ -10,7 +10,7 @@ _记录在阅读《Effective Java》过程中的内容_
 - [三. 对于所有对象都通用的方法](#三-对于所有对象都通用的方法)
     - [1.覆盖equals时总要覆盖hashCode](#1-覆盖equals时总要覆盖hashcode)
     - [2.始终要覆盖toString](#2-始终要覆盖toString)
-    - [3.谨慎地覆盖clone()](#3-谨慎地覆盖clone())
+    - [3.谨慎地覆盖clone()](#3-谨慎地覆盖clone)
     - [4.考虑实现Comparable接口](#4-考虑实现Comparable接口)
 - [四. 类和接口](#四-类和接口)
 
@@ -129,6 +129,7 @@ _记录在阅读《Effective Java》过程中的内容_
 
 **内存泄漏的另一个常见来源是缓存。** 一旦把对象引用放到缓存中，就容易被遗忘。对于这个问题有几种解决方式，可以使用`WeakHashMap`代表缓存；对于过期的缓存要及时清理。对于更加复杂的缓存，考虑直接使用java.lang.ref
 
+
 # 三 对于所有对象都通用的方法
 ## 1. 覆盖equals时总要覆盖hashCode
 在每个覆盖了**equals** 方法的类中，也必须覆盖**hashCode** 方法。否则违反了Object.hashCode的通用约定，从而导致该类无法结合所有基于散列的集合一起工作，这样的集合类包括HashMap, HashSet
@@ -165,6 +166,7 @@ toString方法的默认实现包含了类的名称，以及一个“@”符号�
 ```java
     public static Yum newInstance(Yum yum)
 ```
+
 ## 4. 考虑实现Comparable接口
 类实现了`Comparable`接口，就表明它的实例具有内在的排序关系（natural ordering）。对于实现了Comparable接口的对象数组进行排序，只需要：
 ```java
