@@ -16,6 +16,8 @@
 
 + 通过Java反射机制创建类的实例对象主要有两种方法：    
     1. Class.newInstance()    
-    2. 调用类对象的构造方法。通过`Class.newInstance()`创建类的实例，本质是执行了类对象的默认空参的构造方法，如果一个类没有空参的构造方法，则会抛出`java.lang.NoSuchMethodException`异常
+    2. 调用类对象的构造方法。
+    
+通过`Class.newInstance()`创建类的实例，本质是执行了类对象的默认空参的构造方法，如果一个类没有空参的构造方法，则会抛出`java.lang.NoSuchMethodException`异常
     
 + `java.lang.Class.forName(String name, boolean initialize, ClassLoader classLoader)`如果*initialize*为**false**，则表示JVM不会执行该类的static区域代码段，为**true**表示执行static区域代码段
