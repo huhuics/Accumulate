@@ -34,4 +34,4 @@ Server: Apache 0.84
 
 > RPC = socket + 动态代理
 
-![Java高级开发工程师](image/RPC.png)
+![RPC](image/RPC.png)
